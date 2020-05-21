@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'; 
 import {MatSelectModule} from "@angular/material/select";
 import { MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
@@ -62,7 +63,8 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
 
     
   
