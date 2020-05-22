@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import{Dish} from "../shared/dish";
 import {DISHES} from "../shared/dishes";
-import { Observable,of} from 'rxjs';
+import { Observable,of, observable} from 'rxjs';
 import { delay} from 'rxjs/operators';
 
 
@@ -28,4 +28,9 @@ getFeaturedDish():Observable<Dish> {
 
 
  }
+
+  getDishIds(): Observable<string[] | any>
+  {
+    return of(DISHES.map(dish=>dish.id));
+  }
 }
