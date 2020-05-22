@@ -1,18 +1,45 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import {FormBuilder,FormGroup,Validators} from "@angular/forms";
 import {Feedback,ContactType} from '../shared/feedback';
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  @ViewChild('fform') feedbackFormDirective;
+
   feedbackForm:FormGroup;
   feedback:Feedback;
   contactType=ContactType;
-
-
+  @ViewChild('fform') feedbackFormDirective;
+formErrors={
+  'firstname':'',
+  'lastname':'',
+  'telnum':'',
+  'email':'',
+};
+validationMessages=
+{
+  'firstname':{
+    'required':'first name required.',
+    'minlength':'First name must be at least 2 characters',
+    'maxlength':'First name must be at least 25 characters'
+}, 
+  'lastname':{
+    'required':'first name required.',
+    'minlength':'First name must be at least 2 characters',
+    'maxlength':'First name must be at least 25 characters'
+}, 
+  'telnum':{
+    'required':'tel num  required.',
+    'pattern':'te.num contain only numbers'
+  },
+  'email':{
+    'required':'email num  required.',
+    'email':'email is not valid must contain @'
+  },
+}
   constructor(private fb:FormBuilder) {
     this.createForm();
    }
@@ -21,16 +48,41 @@ export class ContactComponent implements OnInit {
   }
 createForm(){
   this.feedbackForm = this.fb.group({
-    firstname: ['',Validators.required],
-    lastname: ['',Validators.required],
-    telnum: ['',Validators.required],
-    email:['',Validators.required],
+    firstname: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
+    lastname: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
+    telnum: ['',[Validators.required,Validators.pattern]],
+    email:['',[Validators.required,Validators.email]],
     agree: false,
     contacttype: 'None',
     message: ''
   });
+  this.feedbackForm.valueChanges
+  .subscribe(data=>this.onValueChanged(data));
+  this.onValueChanged(); //re(set)form validation message
 }
-
+onValueChanged(data?:any)
+{
+  if(!this.feedbackForm){return;}
+  const form=this.feedbackForm;
+  for (const field in this.formErrors){
+    if(this.formErrors.hasOwnProperty(field))
+    {
+      //clear pervious error message (ifany)
+      this.formErrors[field]='';
+      const control=form.get(field);
+      if(control && control.dirty && !control.valid)
+      {
+        const messages =this.validationMessages[field];
+        for(const key in control.errors)
+        {
+          if(control.errors.hasOwnProperty(key)){
+            this.formErrors[field]+=messages[key]+ ' ';
+          }
+        }
+      }
+    }
+  }
+}
 onSubmit() {
   this.feedback = this.feedbackForm.value;
   console.log(this.feedback);
