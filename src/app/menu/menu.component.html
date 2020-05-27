@@ -9,7 +9,7 @@
     </div>
 
  
-    <div fxFlex *ngIf='dishes'> <!-- show this if dishes is not nul-->
+    <div fxFlex *ngIf='dishes' [@expand]  > <!-- show this if dishes is not nul-->
 
         <mat-grid-list cols="2" rowHeight="200px"><!-- *ngforis directives works as iterative loop -->
           <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail',dish.id]" appHighlight>
