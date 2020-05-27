@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import{ HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import{ ProcessHTTPMsgService} from './services/process-httpmsg.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
@@ -85,6 +86,7 @@ import {baseURL} from './shared/baseurl';
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHTTPMsgService,
     {provide: 'BaseURL', useValue: baseURL} ,
   ],
       
