@@ -35,7 +35,7 @@ import {PromotionService} from "./services/promotion.service";
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LeaderService } from './services/leader.service';
 import { LoginComponent } from './login/login.component';
-
+import { FeedbackService } from './services/feedback.service';
 
 
 import {baseURL} from './shared/baseurl';
@@ -89,6 +89,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     ProcessHTTPMsgService,
+    FeedbackService,
     {provide: 'BaseURL', useValue: baseURL} ,
   ],
       

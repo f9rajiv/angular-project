@@ -20,7 +20,8 @@ import { visibility,flyInOut,expand } from '../animations/app.animation';
     },
     animations: [
       flyInOut(),
-      expand()
+      expand(),
+      visibility()
     ]
 })
 
